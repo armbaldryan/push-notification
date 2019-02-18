@@ -21,6 +21,12 @@ webpush.setVapidDetails(
 );
 
 // Subscribe Route
+/**
+ * We can do a query in postman, and service worker will work if browser is opened,
+ * if not it will be in queue and will work when first time opening browser. and also it is required to send
+ * request body before sending post query, it will be like this.
+ * {"endpoint":"https://fcm.googleapis.com/fcm/send/eTsVtgv0QdE:APA91bHPWUmgl2qYx7rYJ53xeiNyWcnGWHVuOmrl03TWNBmD_rgajnhu52Mi-uAwggfHhqhlyHxnfViVEthFc3njADhJLgWp8LcKNPdL3Jr9RQY_gv2NDP-MTJDwmMHAjb_U6ZzvdI3f","expirationTime":null,"keys":{"p256dh":"BL-sOHjOJyF4wYU8wROaDclmQAcRWe3YinS6_cDEUKb3gV8FmqWMRUwZCIG4LkV5NTSRMXuFSnBlGh0v3obyURw","auth":"Zjjjt52PqVlsFAsSkKVnWQ"}}
+ */
 app.post("/subscribe", (req, res) => {
   // Get pushSubscription object
   const subscription = req.body;

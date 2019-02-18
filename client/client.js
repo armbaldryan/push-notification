@@ -1,11 +1,15 @@
+/**
+ * In Client we need only public vapid key to subscribe user to push notifications
+ */
 const publicVapidKey =
   "BJthRQ5myDgc7OSXzPCMftGw-n16F7zQBEN7EUD6XxcfTTvrLGWSIG7y_JxiWtVlCFua0S8MTB5rPziBqNx1qIo";
 
 // Check for service worker
 if ('serviceWorker' in navigator) {
   /**
-   * Permission is granted, default or denied
-   * @type {Promise<NotificationPermission>}
+   * Permission is granted, default or denied.
+   * These checks could be helpful to choose right condition for
+   * registering service worker or it its already registered
    */
   const permission = window.Notification.requestPermission() || window.Notification.permission;
   send().catch(err => console.error(err));
@@ -17,7 +21,7 @@ async function send() {
   console.log("Registering service worker...");
   const register = await navigator.serviceWorker.register("/worker.js", {
     scope: "/"
-  })
+  });
   console.log("Service Worker Registered...");
 
   // Register Push

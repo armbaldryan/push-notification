@@ -1,5 +1,8 @@
 console.log("Service Worker Loaded...");
 
+/**
+ * event.waitUntil is for asynchronous.
+ */
 self.addEventListener("push", event => {
   const data = event.data.json();
   console.log("Push Recieved...");
@@ -10,8 +13,10 @@ self.addEventListener("push", event => {
 });
 
 self.addEventListener('notificationclick', function (event) {
+  /**
+   * We are closing notification window and open a link
+   */
   event.notification.close();
   console.log('onClick event');
-  console.log(clients)
-  event.waitUntil(clients.openWindow("https://youtu.be/PAvHeRGZ_lA"));
+  event.waitUntil(clients.openWindow("https://hexometer.com"));
 });
