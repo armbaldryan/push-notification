@@ -1,0 +1,22 @@
+/**
+ * @todo Worker.ts doesnt work normally, will research more. I have pushed
+ * to save typescript declared types, as they are not like usual
+ */
+export default null;
+declare var self: ServiceWorkerGlobalScope;
+const { clients, addEventListener, registration } = self as ServiceWorkerGlobalScope;
+
+addEventListener("push", (event: any) => {
+  const data = event.data.json();
+  event.waitUntil(registration.showNotification(data.title, {
+    body: "Notified by HexActData",
+  }));
+});
+
+addEventListener('notificationclick', function (event: any) {
+  /**
+   * We are closing notification window and open a link
+   */
+  event.notification.close();
+  event.waitUntil(clients.openWindow("https://hexometer.com"));
+});
